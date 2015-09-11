@@ -30,7 +30,12 @@ pwrNames<-read.table("household_power_consumption.txt",header=F,sep=";",stringsA
 ## and we will read the subsequent 2880 observations to cover the required 2 days
 ## (one observation every minute x 60 minutes/hr. x 48 hours)
 ## 
-feb0102Pwr<-read.table("household_power_consumption.txt",header=F,sep=";",stringsAsFactors=F,skip=66637,nrows=2880,na.strings="?")
+first_record<-read.table("household_power_consumption.txt",header=F,sep=";",stringsAsFactors=F,skip=1,nrows=1)
+first_record_datetime<-strptime(paste(as.Date(first_record[1,1],"%d/%m/%Y"),first_record[1,2]),"%Y-%m-%d %H:%M:%S")
+firstfeb_datetime<-strptime(paste(as.Date("1/2/2007","%d/%m/%Y"),"00:00:00"),"%Y-%m-%d %H:%M:%S")
+numrec<-(firstfeb_datetime-first_record_datetime)*24*60
+
+feb0102Pwr<-read.table("household_power_consumption.txt",header=F,sep=";",stringsAsFactors=F,skip=numrec+1,nrows=2880,na.strings="?")
 ##
 ## Reassign column names to our new subset of observations
 ##
