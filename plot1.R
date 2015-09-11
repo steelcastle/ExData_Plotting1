@@ -20,8 +20,13 @@ pwrNames<-read.table("household_power_consumption.txt",header=F,sep=";",stringsA
 ##
 ## In order to speed up the exploratory analysis process we will only
 ## read a subset of records from the raw data file based on selected row
-## numbers. This selection is determined by visual inspection of the raw data file
-## (using the Notepad++ utility). The starting row for Feb. 1/2007 00:00:00 is #66638
+## numbers. This selection is determined by calculating the time difference between the first observation record in the file
+## and the first observation for Feb. 1 2007. This time difference is then multiplied by 24 hours and then 
+## 60 since there are 60 observations per hour (one per minute). This yields the starting row number
+## for Feb 1st, 2007 which happens to be 66637 + 1 (accounting for header row).
+## 
+## One can also use visual inspection of the raw data file
+## (using the Notepad++ utility) to determine that the starting row for Feb. 1/2007 00:00:00 is #66638
 ## and we will read the subsequent 2880 observations to cover the required 2 days
 ## (one observation every minute x 60 minutes/hr. x 48 hours)
 ## 
