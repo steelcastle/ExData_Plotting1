@@ -1,5 +1,5 @@
 ## =======================================================================================
-## plot1.R
+## plot4.R
 ## =======================================================================================
 ## Perform setup tasks which are common to all plotting exercises 1-4.
 ##
@@ -43,16 +43,48 @@ feb0102Pwr$DateTime<-strptime(paste(feb0102Pwr$Date,feb0102Pwr$Time),"%Y-%m-%d %
 ##
 ## =======================================================================================
 ##
-## Plot1 - histogram of global active power over the required period of
-##         February 1st - 2nd, 2007
-##
 ## Open a png device to accept the plot
 ##
-png("plot1.png", width=480, height=480)
+png("plot4.png", width=480, height=480)
 ##
-## Plot the frequency histogram for the Global Active Power column
+## Plot4 - multiple plots shown in 2 by 2 array
+##              1. global active power
+##              2. Voltage
+##              3. Energy sub metering
+##              4. Global reactive power
+##         ** each plotted against February 1st - 2nd, 2007
 ##
-hist(feb0102Pwr$Global_active_power,col="red", main = "Global Active Power", xlab = "Global Active Power (kilowatts)")
+## Set up plot window
+## 
+par(mfrow=c(2,2))
+##
+## 1. Top left position
+##
+## Plot the Global Active Power versus the actual Date/Time
+##
+plot(feb0102Pwr$DateTime,feb0102Pwr$Global_active_power,type="l",xlab="",ylab="Global Active Power")
+##
+## 2. Top right position
+##
+## Plot Voltage versus the actual Date/Time
+##
+plot(feb0102Pwr$DateTime,feb0102Pwr$Voltage,type="l",xlab="datetime",ylab="Voltage")
+##
+## 3. Bottom left position
+## Plot the 3 sets of sub-metering values versus the actual Date/Time
+##
+plot(feb0102Pwr$DateTime,feb0102Pwr$Sub_metering_1,type="l",xlab="",ylab="Energy sub metering")
+lines(feb0102Pwr$DateTime,feb0102Pwr$Sub_metering_2,col="red")
+lines(feb0102Pwr$DateTime,feb0102Pwr$Sub_metering_3,col="blue")
+##
+## Add the legend with appropriate labels and colours
+##
+legend("topright",c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),col=c("black","red","blue"),lty="solid",bty="n")
+##
+## 4. Bottom right position
+## Plot the Global Reactive Power versus the actual Date/Time
+##
+plot(feb0102Pwr$DateTime,feb0102Pwr$Global_reactive_power,type="l",xlab="datetime",ylab="Global_reactive_power")
 ##
 ## Close the png image file by turning off the device
 ##

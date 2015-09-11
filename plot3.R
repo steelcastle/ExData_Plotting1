@@ -18,7 +18,7 @@ if(!file.exists("household_power_consumption.txt"))
 ##
 pwrNames<-read.table("household_power_consumption.txt",header=F,sep=";",stringsAsFactors=F,nrows=1)
 ##
-## In order to speed up the exploratory analysis processm we will only
+## In order to speed up the exploratory analysis process we will only
 ## read a subset of records from the raw data file based on selected row
 ## numbers. This selection is determined by visual inspection of the raw data file
 ## (using the Notepad++ utility). The starting row for Feb. 1/2007 00:00:00 is #66637
@@ -43,7 +43,7 @@ feb0102Pwr$DateTime<-strptime(paste(feb0102Pwr$Date,feb0102Pwr$Time),"%Y-%m-%d %
 ##
 ## =======================================================================================
 ##
-## Plot2 - plot of global active power over the required period of
+## Plot3 - plot of 3 sets of submetering values over the required period of
 ##         February 1st - 2nd, 2007
 ##
 ## Open a png device to accept the plot
